@@ -2,12 +2,13 @@ var intervalId = 0;
 
 newMessages = function(){
 	$(".fbNubFlyout.fbDockChatTabFlyout").each(function(index){
-		$(this).find(".uiTextareaAutogrow._552m").css("border-color","red");
+		$(this).find(".uiTextareaAutogrow._552m").css("border-color","red").css("border-style","groove").css("border-width","1px");
 		$("._kso.fsm.direction_ltr._55r0").each(function(){
 			var textfield = $(this).children("span").children("span");
 			var text = textfield.text();
 			if (text.substring(0, 13) == "==encrypted==") {
 				var toEncrypt = text.substring(13,text.length);
+				$(this).css("border-right","3px solid yellow").css("border","1px solid yellow");
 				textfield.text(rot13x(toEncrypt));
 			}
 		});
@@ -19,6 +20,7 @@ newMessages = function(){
 			var text = textfield.text();
 			if (text.substring(0, 13) == "==encrypted==") {
 				var toEncrypt = text.substring(13,text.length);
+				textfield.css("border-right","3px solid yellow");
 				textfield.text(rot13x(toEncrypt));
 			}
 		});
