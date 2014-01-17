@@ -1,9 +1,9 @@
 {
-    "name": "secure-chat",
-    "fullName": "secure-chat",
-    "id": "jid1-yCn9iL9UbMhfEw",
-    "description": "a basic add-on",
-    "author": "",
-    "license": "MPL 2.0",
-    "version": "0.1"
+  "name": "nsa",
+  "fullName": "NSA",
+  "id": "jid1-Y86bXAf8Pxptzg",
+  "description": "a basic add-on",
+  "author": "",
+  "license": "MPL 2.0",
+  "version": "0.1"
 }
