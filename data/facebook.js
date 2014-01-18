@@ -3,25 +3,36 @@ var intervalId = 0;
 newMessages = function(){
 	$(".fbNubFlyout.fbDockChatTabFlyout").each(function(index){
 		$(this).find(".uiTextareaAutogrow._552m").css("border-color","red").css("border-style","groove").css("border-width","1px");
-		$("._kso.fsm.direction_ltr._55r0").each(function(){
+		var currentToDecryptId = 0;
+		currentToDecryptId = $(this).find("a[href*='www.facebook.com/messages/']").attr("href").split("/")[4];
+		$(this).find("._kso.fsm.direction_ltr._55r0").each(function(){
 			var textfield = $(this).children("span").children("span");
 			var text = textfield.text();
 			if (text.substring(0, 13) == "==encrypted==") {
 				var toEncrypt = text.substring(13,text.length);
 				$(this).css("border-right","3px solid yellow").css("border","1px solid yellow");
-				textfield.text(rot13x(toEncrypt));
+				textfield.text(rot13x(toEncrypt)+"///"+currentToDecryptId);
 			}
 		});
 	});
 	var uri = window.location.pathname;
 	if(uri.substring(0,10)=="/messages/"){
+		var currentToDecryptId = 0;
+		$("a[data-hovercard*='/ajax/hovercard/hovercard.php?id=']").each(function(){
+			if($(this).closest("span")){
+				//TODO: WICHTIG, VERMUTLICH NICHT GANZ KORREKT!!! PRÜFEN!
+				currentToDecryptId = $(this).attr("data-hovercard").split("=")[1].split("&")[0];
+				return false;
+			}
+		});
+		//currentToDecryptId = uri.split("/")[2];
 		$("._38.direction_ltr").each(function(){
 			var textfield = $(this).children("span").children("p");
 			var text = textfield.text();
 			if (text.substring(0, 13) == "==encrypted==") {
 				var toEncrypt = text.substring(13,text.length);
 				textfield.css("border-right","3px solid yellow");
-				textfield.text(rot13x(toEncrypt));
+				textfield.text(rot13x(toEncrypt)+"///"+currentToDecryptId);
 			}
 		});
 	}
@@ -47,6 +58,10 @@ $(window).on("blur focus", function(e) {
 
 $(document).ready(function(){
 	CheckInterval();
+	var userId = $("input[name='targetid']").attr("value");
+	if(userId){
+		sessionStorage.setItem("OwnFacebookUserId",userId);
+	}
 });
 
 function CheckInterval(){
