@@ -1,4 +1,5 @@
 var intervalId = 0;
+var intervalTime = 250;
 
 newMessages = function(){
 	$(".fbNubFlyout.fbDockChatTabFlyout").each(function(index){
@@ -66,7 +67,7 @@ $(document).ready(function(){
 
 function CheckInterval(){
 	if(!intervalId){
-		intervalId = window.setInterval(newMessages,250);
+		intervalId = window.setInterval(newMessages,intervalTime);
 	}
 };
 
