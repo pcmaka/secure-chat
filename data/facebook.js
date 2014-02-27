@@ -13,12 +13,7 @@ newMessages = function(){
 			if (text.substring(0, 13) == "==encrypted==") {
 				var toEncrypt = text.substring(13,text.length);
 				$(this).css("border-right","3px solid yellow").css("border","1px solid yellow");
-<<<<<<< HEAD
 				textfield.text(encrypt(toEncrypt)+"///"+currentToDecryptId);
-=======
-				//textfield.text(encrypt(toEncrypt)+"///"+currentToDecryptId);
-				textfield.text("asd");
->>>>>>> origin/dev3
 			}
 		});
 	});
@@ -35,21 +30,10 @@ newMessages = function(){
 		$("._38.direction_ltr").each(function(){
 			var textfield = $(this).children("span").children("p");
 			var text = textfield.text();
-<<<<<<< HEAD
 			if (text.substring(0, 13) == "==encrypted==") {
 				var toEncrypt = text.substring(13,text.length);
 				textfield.css("border-right","3px solid yellow");
 				textfield.text(encrypt(toEncrypt)+"///"+currentToDecryptId);
-=======
-			if (text.substring(0, 27) == "-----BEGIN PGP MESSAGE-----") {
-				//var toEncrypt = text.substring(27,text.length);
-				textfield.css("border-right","3px solid yellow");
-				var test = text.replace(/openpgpjs.org/,"openpgpjs.org\n\n");
-				textfield.text("asd");
-				decrypted = NSAcrypt.decrypt(test+"\n");
-				//textfield.text(encrypt(toEncrypt)+"///"+currentToDecryptId);
-				textfield.text(decrypted);
->>>>>>> origin/dev3
 			}
 		});
 	}
@@ -85,11 +69,6 @@ $(document).ready(function(){
 		NSAcrypt.generateKeys(ownID,"test");
 	}else{
 		if(ownID && NSAcrypt.hasPrivateKey(ownID)){
-<<<<<<< HEAD
-=======
-			var PrivateKey = NSAcrypt.getPrivateKey(ownID);
-			self.port.emit("privateKey",PrivateKey);
->>>>>>> origin/dev3
 			window.alert("Private Key Found!");
 			//Kommentar entfernen zum testweise löschen der Keys
 			//NSAcrypt.clearKeys();
