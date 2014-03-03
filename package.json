@@ -1,9 +1,9 @@
 {
-  "name": "nsa",
-  "fullName": "NSA",
+  "name": "fsc",
+  "fullName": "Facebook Secure Chat",
   "id": "jid1-Y86bXAf8Pxptzg",
-  "description": "a basic add-on",
-  "author": "",
+  "description": "Facebook Chat Encryption with PGP",
+  "author": "Sebastian Schmitt, Max Klein, Fabian Pruditsch",
   "license": "MPL 2.0",
-  "version": "0.1"
+  "version": "0.2"
 }

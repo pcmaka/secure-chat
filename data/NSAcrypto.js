@@ -45,11 +45,37 @@ NSAcrypt = {
 		try{
 			key = openpgp.key.readArmored(keyString);
 		}catch(e){
+			return "Key fehlerhaft";
+		}
+		if(key.keys.length){
+			console.log(key.keys[0].armor());
+			var user = key.keys[0].getUserIds();
+			var keyCheck = keyring.getPublicKeyForAddress(user[0]);
+			if((user[0].substring(user[0].length-ownEnding.length,user[0].length) === ownEnding) && (keyCheck.length == 0)){
+				keyring.importKey(key.keys[0].armor());
+				keyring.store();
+				return "success";
+			}else{
+				return "Key bereits eingegeben";
+			}
+		}else{
+			return "Key fehlerhaft";
+		}
+	},
+	
+	addPrivateKey: function(keyString){
+		var key;
+		try{
+			key = openpgp.key.readArmored(keyString);
+		}catch(e){
 			return false;
 		}
-		if(key.keys[0].armor()){
-			keyring.importKey(key.keys[0].armor());
+		if(key.keys.length){
+			var armor = key.keys[0].armor();
+			console.log(armor);
+			keyring.importKey(armor);
 			keyring.store();
+			privateKey = armor;
 			return true;
 		}else{
 			return false;
@@ -59,6 +85,19 @@ NSAcrypt = {
 	removePublicKey: function(facebookID){
 		var id = facebookID + ownEnding;
 		var key = keyring.getPublicKeyForAddress(id);
+		for(var i = 0; i<keyring.keys.length;i++){
+			if(keyring.keys[i] == key[0]){
+				keyring.removeKey(i);
+				keyring.store();
+				return true;
+			}
+		}
+		return false;
+	},
+	
+	removePrivateKey: function(facebookID){
+		var id = facebookID + ownEnding;
+		var key = keyring.getPrivateKeyForAddress(id);
 		for(var i = 0; i<keyring.keys.length;i++){
 			if(keyring.keys[i] == key[0]){
 				keyring.removeKey(i);
